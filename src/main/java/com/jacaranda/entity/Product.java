@@ -8,14 +8,23 @@ public class Product {
 
 	
 	
+//	public Product() {
+//		super();
+//	}
+//	public Product(Enum tipoSuscripcion) {
+//		super();
+//		this.idProduct = idSiguiente++;
+//		this.tipoSuscripcion = tipoSuscripcion;
+//	}
 	public Product() {
 		super();
+		this.idProduct = idSiguiente++;
 	}
 	public Product(Enum tipoSuscripcion) {
-		super();
-		this.idProduct = idSiguiente++;
-		this.tipoSuscripcion = tipoSuscripcion;
-	}
+	this();
+	this.tipoSuscripcion = tipoSuscripcion;
+}
+
 	
 	
 	

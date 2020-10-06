@@ -19,8 +19,10 @@ public class SerieController {
 
 	private List<Serie> series = new ArrayList<>() {
 		{
-			add(new Serie("Black Mirror"));
-			add(new Serie("Dark"));
+//			add(new Serie("Black Mirror"));
+			add(new Serie("Black Mirror", SuscriptionEnum.PREMIUM));
+//			add(new Serie("Dark"));
+			add(new Serie("Dark", SuscriptionEnum.STANDARD));
 			add(new Serie("Breaking Bad"));
 			add(new Serie("Stranger Things"));
 			add(new Serie("Friends"));

@@ -4,7 +4,8 @@ public class Serie extends Product {
 
 	private int idSerie;
 	private static int idSiguiente = 0;
-	private String title;	
+	private String title;
+	private Enum tipoSuscripcion;
 	//idProducto heredado de Producto
 	
 	
@@ -12,12 +13,23 @@ public class Serie extends Product {
 	public Serie() {
 		super();
 	}
+//	public Serie(String title) {
+//		super();
+//		this.idSerie = idSiguiente++;
+//		this.title = title;
+//	}
 	public Serie(String title) {
 		super();
 		this.idSerie = idSiguiente++;
 		this.title = title;
 	}
-
+	public Serie(String title, Enum tipoSuscripcion) {
+		super();
+		this.idSerie = idSiguiente++;
+		this.title = title;
+		this.tipoSuscripcion = tipoSuscripcion;
+	}
+	
 	
 	
 	

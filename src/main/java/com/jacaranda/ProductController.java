@@ -26,12 +26,14 @@ public class ProductController {
 
 	private List<Product> products = new ArrayList<>() {
 		{
-			add(new Product(SuscriptionEnum.BASIC));
-			add(new Product(SuscriptionEnum.BASIC));
-			add(new Product(SuscriptionEnum.STANDARD));
-			add(new Product(SuscriptionEnum.STANDARD));
-			add(new Product(SuscriptionEnum.PREMIUM));
-			add(new Product(SuscriptionEnum.PREMIUM));
+//			add(new Product(SuscriptionEnum.BASIC));
+//			add(new Product(SuscriptionEnum.BASIC));
+//			add(new Product(SuscriptionEnum.STANDARD));
+//			add(new Product(SuscriptionEnum.STANDARD));
+//			add(new Product(SuscriptionEnum.PREMIUM));
+//			add(new Product(SuscriptionEnum.PREMIUM));
+			add(new Product());
+			add(new Product());
 		}
 	};
 
