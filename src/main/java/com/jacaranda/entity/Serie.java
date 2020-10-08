@@ -1,6 +1,8 @@
 package com.jacaranda.entity;
 
-public class Serie extends Product {
+import java.io.Serializable;
+
+public class Serie extends Product implements Serializable {
 
 	private int idSerie;
 	private static int idSiguiente = 0;
@@ -13,11 +15,6 @@ public class Serie extends Product {
 	public Serie() {
 		super();
 	}
-//	public Serie(String title) {
-//		super();
-//		this.idSerie = idSiguiente++;
-//		this.title = title;
-//	}
 	public Serie(String title) {
 		super();
 		this.idSerie = idSiguiente++;
@@ -50,6 +47,12 @@ public class Serie extends Product {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public Enum getTipoSuscripcion() {
+		return tipoSuscripcion;
+	}
+	public void setTipoSuscripcion(Enum tipoSuscripcion) {
+		this.tipoSuscripcion = tipoSuscripcion;
 	}
 	
 	
