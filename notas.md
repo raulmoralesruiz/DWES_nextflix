@@ -50,3 +50,16 @@ Corregir:
 
 - Al hacer post, si la serie existe...
   no debe incrementarse el id de producto.
+
+- Al crear visualización en un cliente.
+
+  - incrementar auto el id de visualizacion
+  - controlar que los campos no puedan estar vacíos
+  - controlar que el idProduct sea válido (exista)
+
+    {
+    "idVisual": 0,
+    "inicio": "2020-05-01T02:00:00",
+    "fin": "2020-05-01T02:15:00",
+    "idProduct": 2
+    }

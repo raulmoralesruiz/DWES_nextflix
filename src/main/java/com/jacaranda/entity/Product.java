@@ -4,7 +4,7 @@ public class Product {
 	
 	private int idProduct;
 	private static int idSiguiente = 0;
-	private Enum tipoSuscripcion;  
+	private SuscriptionEnum tipoSuscripcion;  
 
 	
 	
@@ -20,7 +20,7 @@ public class Product {
 		super();
 		this.idProduct = idSiguiente++;
 	}
-	public Product(Enum tipoSuscripcion) {
+	public Product(SuscriptionEnum tipoSuscripcion) {
 	this();
 	this.tipoSuscripcion = tipoSuscripcion;
 }
@@ -40,10 +40,10 @@ public class Product {
 	public static void setIdSiguiente(int idSiguiente) {
 		Product.idSiguiente = idSiguiente;
 	}
-	public Enum getTipoSuscripcion() {
+	public SuscriptionEnum getTipoSuscripcion() {
 		return tipoSuscripcion;
 	}
-	public void setTipoSuscripcion(Enum tipoSuscripcion) {
+	public void setTipoSuscripcion(SuscriptionEnum tipoSuscripcion) {
 		this.tipoSuscripcion = tipoSuscripcion;
 	}
 	

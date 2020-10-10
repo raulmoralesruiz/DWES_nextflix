@@ -2,7 +2,9 @@ package com.jacaranda.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Customer implements Serializable {
 
 	private String name;
@@ -16,6 +18,7 @@ public class Customer implements Serializable {
 	private String gender;
 	private int id;
 	private static int idSiguiente = 0;
+	private ArrayList<Visual> visuals;
 	
 
 	
@@ -37,6 +40,7 @@ public class Customer implements Serializable {
 		this.surname = surname;
 		this.city = city;
 		this.dni = dni;
+		this.visuals = new ArrayList<Visual>();
 	}
 	
 	
@@ -53,6 +57,7 @@ public class Customer implements Serializable {
 		this.country = country;
 		this.mobileNumber = mobileNumber;
 		this.gender = gender;
+		this.visuals = new ArrayList<Visual>();
 	}
 
 
@@ -117,7 +122,13 @@ public class Customer implements Serializable {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
+	public ArrayList<Visual> getVisuals() {
+		return visuals;
+	}
+	public void setVisuals(ArrayList<Visual> visuals) {
+		this.visuals = visuals;
+	}
+	
 
 //	@Override
 //	public String toString() {
@@ -126,6 +137,22 @@ public class Customer implements Serializable {
 //				+ ", gender=" + gender + "]";
 //	}
 
+	public void addVisual(Visual v) {
+		visuals.add(v);
+	}
+	
+	
+	public int contadorVisuals() {
+		int cont = 0;
+
+		for (Visual v : visuals) {
+			if (v.getIdProduct() > 0) {
+				cont++;
+			}
+		}
+
+		return cont;
+	}
 
 	
 	

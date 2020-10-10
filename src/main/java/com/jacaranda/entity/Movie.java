@@ -44,12 +44,6 @@ public class Movie extends Product implements Serializable {
 	public void setIdMovie(int idMovie) {
 		this.idMovie = idMovie;
 	}
-	public static int getIdSiguiente() {
-		return idSiguiente;
-	}
-	public static void setIdSiguiente(int idSiguiente) {
-		Movie.idSiguiente = idSiguiente;
-	}
 	public String getTitle() {
 		return title;
 	}

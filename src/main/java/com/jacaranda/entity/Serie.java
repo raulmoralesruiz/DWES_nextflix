@@ -45,12 +45,6 @@ public class Serie extends Product implements Serializable {
 	public void setIdSerie(int idSerie) {
 		this.idSerie = idSerie;
 	}
-	public static int getIdSiguiente() {
-		return idSiguiente;
-	}
-	public static void setIdSiguiente(int idSiguiente) {
-		Serie.idSiguiente = idSiguiente;
-	}
 	public String getTitle() {
 		return title;
 	}

@@ -1,14 +1,14 @@
 package com.jacaranda.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Visual {
 
 	
 	private int idVisual;
 	private static int idSiguiente = 0;
-	private LocalDate inicio;
-	private LocalDate fin;
+	private LocalDateTime inicio;
+	private LocalDateTime fin;
 	private int idProduct;
 
 	
@@ -16,11 +16,38 @@ public class Visual {
 	public Visual() {
 		super();
 	}
-	public Visual(LocalDate inicio, LocalDate fin, int idProduct) {
+	public Visual(LocalDateTime inicio, LocalDateTime fin, int idProduct) {
 		super();
 		this.idVisual = idSiguiente++;
 		this.inicio = inicio;
 		this.fin = fin;
+		this.idProduct = idProduct;
+	}
+	
+	
+	
+	public int getIdVisual() {
+		return idVisual;
+	}
+	public void setIdVisual(int idVisual) {
+		this.idVisual = idVisual;
+	}
+	public LocalDateTime getInicio() {
+		return inicio;
+	}
+	public void setInicio(LocalDateTime inicio) {
+		this.inicio = inicio;
+	}
+	public LocalDateTime getFin() {
+		return fin;
+	}
+	public void setFin(LocalDateTime fin) {
+		this.fin = fin;
+	}
+	public int getIdProduct() {
+		return idProduct;
+	}
+	public void setIdProduct(int idProduct) {
 		this.idProduct = idProduct;
 	}
 	
