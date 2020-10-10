@@ -4,14 +4,14 @@ public class Suscription {
 
 	private int idSuscription;
 	private static int idSiguiente = 0;
-	private Enum tipo;  
+	private SuscriptionEnum tipo;  
 
 	
 	
 	public Suscription() {
 		super();
 	}
-	public Suscription(Enum tipo) {
+	public Suscription(SuscriptionEnum tipo) {
 		super();
 		this.idSuscription = idSiguiente++;
 		this.tipo = tipo;
@@ -31,10 +31,10 @@ public class Suscription {
 	public static void setIdSiguiente(int idSiguiente) {
 		Suscription.idSiguiente = idSiguiente;
 	}
-	public Enum getTipo() {
+	public SuscriptionEnum getTipo() {
 		return tipo;
 	}
-	public void setTipo(Enum tipo) {
+	public void setTipo(SuscriptionEnum tipo) {
 		this.tipo = tipo;
 	}
 	

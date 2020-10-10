@@ -2,12 +2,14 @@ package com.jacaranda.entity;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Serie extends Product implements Serializable {
 
 	private int idSerie;
 	private static int idSiguiente = 0;
 	private String title;
-	private Enum tipoSuscripcion;
+	private SuscriptionEnum tipoSuscripcion;
+	private Category categoria;
 	//idProducto heredado de Producto
 	
 	
@@ -20,11 +22,18 @@ public class Serie extends Product implements Serializable {
 		this.idSerie = idSiguiente++;
 		this.title = title;
 	}
-	public Serie(String title, Enum tipoSuscripcion) {
+	public Serie(String title, SuscriptionEnum tipoSuscripcion) {
 		super();
 		this.idSerie = idSiguiente++;
 		this.title = title;
 		this.tipoSuscripcion = tipoSuscripcion;
+	}
+	public Serie(String title, SuscriptionEnum tipoSuscripcion, Category categoria) {
+		super();
+		this.idSerie = idSiguiente++;
+		this.title = title;
+		this.tipoSuscripcion = tipoSuscripcion;
+		this.categoria = categoria;
 	}
 	
 	
@@ -48,11 +57,17 @@ public class Serie extends Product implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Enum getTipoSuscripcion() {
+	public SuscriptionEnum getTipoSuscripcion() {
 		return tipoSuscripcion;
 	}
-	public void setTipoSuscripcion(Enum tipoSuscripcion) {
+	public void setTipoSuscripcion(SuscriptionEnum tipoSuscripcion) {
 		this.tipoSuscripcion = tipoSuscripcion;
+	}
+	public Category getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Category categoria) {
+		this.categoria = categoria;
 	}
 	
 	

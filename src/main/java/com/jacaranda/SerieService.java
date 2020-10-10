@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class SerieService {
 
 	public boolean isValidTitle(String title) {
-		return title.length() > 0;
+		return title != null; //devuelve true, si el título no es nulo
 	}
 	
 }
