@@ -62,6 +62,12 @@ public class Movie extends Product implements Serializable {
 	public void setCategoria(Category categoria) {
 		this.categoria = categoria;
 	}
+	
+	
+	@Override
+	public int getIdSerie() {
+		return -11;
+	}
 
 	
 	

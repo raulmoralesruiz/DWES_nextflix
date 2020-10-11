@@ -40,6 +40,16 @@ public class Documentary extends Product {
 	}
 	
 	
+	@Override
+	public int getIdMovie() {
+		return -1;
+	}
+	@Override
+	public int getIdSerie() {
+		return -1;
+	}
+	
+	
 
 	
 }

@@ -65,6 +65,12 @@ public class Serie extends Product implements Serializable {
 	}
 	
 	
+	@Override
+	public int getIdMovie() {
+		return -11;
+	}
+	
+	
 	
 
 	

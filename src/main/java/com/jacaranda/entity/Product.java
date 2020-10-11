@@ -1,6 +1,6 @@
 package com.jacaranda.entity;
 
-public class Product {
+public abstract class Product {
 	
 	private int idProduct;
 	private static int idSiguiente = 0;
@@ -46,6 +46,12 @@ public class Product {
 	public void setTipoSuscripcion(SuscriptionEnum tipoSuscripcion) {
 		this.tipoSuscripcion = tipoSuscripcion;
 	}
+	
+	
+	public abstract String getTitle();
+	public abstract int getIdMovie();
+	public abstract void setTitle(String newTitle);
+	public abstract int getIdSerie();
 	
 
 	

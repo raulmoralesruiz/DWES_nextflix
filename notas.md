@@ -53,9 +53,10 @@ Corregir:
 
 - Al crear visualización en un cliente.
 
-  - incrementar auto el id de visualizacion
   - controlar que los campos no puedan estar vacíos
   - controlar que el idProduct sea válido (exista)
+    ? --> idProdMax = series.size() + movies.size();
+    ? --> crear enum TipoContenido (serie, peli), si es de tipo serie se busca en la lista de series
 
     {
     "idVisual": 0,
