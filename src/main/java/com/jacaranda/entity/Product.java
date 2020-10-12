@@ -1,30 +1,22 @@
 package com.jacaranda.entity;
 
-public abstract class Product {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public abstract class Product implements Serializable {
 	
 	private int idProduct;
 	private static int idSiguiente = 0;
 	private SuscriptionEnum tipoSuscripcion;  
 
-	
-	
-//	public Product() {
-//		super();
-//	}
-//	public Product(Enum tipoSuscripcion) {
-//		super();
-//		this.idProduct = idSiguiente++;
-//		this.tipoSuscripcion = tipoSuscripcion;
-//	}
 	public Product() {
 		super();
 		this.idProduct = idSiguiente++;
 	}
 	public Product(SuscriptionEnum tipoSuscripcion) {
-	this();
-	this.tipoSuscripcion = tipoSuscripcion;
-}
-
+		this();
+		this.tipoSuscripcion = tipoSuscripcion;
+	}
 	
 	
 	

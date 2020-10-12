@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jacaranda.entity.ComparaClienteDNI;
 import com.jacaranda.entity.ComparaClienteNombre;
 import com.jacaranda.entity.Customer;
+import com.jacaranda.entity.SuscriptionEnum;
 import com.jacaranda.entity.Visual;
 
 /**
@@ -35,58 +35,15 @@ public class CustomerController {
 	@SuppressWarnings("serial")
 	private List<Customer> customers = new ArrayList<>() {
 		{
-			add(new Customer("Ruben", "Dxc", "Sev", "823"));
-			add(new Customer("Alvaro", "Geerw", "Sev", "932"));
-			add(new Customer("Yi", "Bwerd", "Sev", "178"));
-			add(new Customer("Largo", "Ape", LocalDate.of(1992, 10, 22), "address", "city", "dni", "country", "666444999", "Masculino"));
-			add(new Customer("Raul", "Sdfe", "Sev", "323"));
+			add(new Customer("Alvaro", "Sánchez", "Sevilla", "11111111A", SuscriptionEnum.BASIC));
+			add(new Customer("Yi", "Chen", "Sevilla", "22222222B", SuscriptionEnum.STANDARD));
+			add(new Customer("Cliente", "Largo", LocalDate.of(1992, 10, 22), "address", "city", "dni", "country", "666444999", "Masculino", SuscriptionEnum.BASIC));
+			add(new Customer("Raul", "Morales", "Sevilla", "33333333C", SuscriptionEnum.PREMIUM));
 		}
 	};
 
-	@GetMapping("/customers")
-	public List<Customer> getCustomers() {
-		// Se ordena la lista de clientes
-		Collections.sort(customers, new ComparaClienteDNI());
-
-		// Se devuelve la lista de clientes ordenada
-		return customers;
-	}
-	
-	
-	@GetMapping("/ordenado")
-	public ResponseEntity<?> ordena(@RequestParam String parametro) {
-		
-		if (parametro.equalsIgnoreCase("dni")) {
-			Collections.sort(customers, new ComparaClienteDNI());
-		}
-		
-		if (parametro.equalsIgnoreCase("nombre")) {
-			Collections.sort(customers, new ComparaClienteNombre());
-		}
-				
-		return ResponseEntity.ok(customers);
-	}
 
 	
-	@GetMapping("/sorted")
-	public ResponseEntity<?> sorted(@RequestParam String parametro) {
-				
-		ResponseEntity<?> response = null;
-		customers = null; //new ArrayList<>();
-
-		
-		if (customers.isEmpty()) {
-			response = ResponseEntity.
-					status(HttpStatus.NOT_FOUND).body("La lista está vacía");
-		} else {
-			response = ResponseEntity.status(HttpStatus.OK).body(customers);
-		}
-		
-		return response;
-	}
-	
-
-	// ---------------- CREAR CRUD, con los correspondientes mensajes HTTP ----------------
 
 	/**
 	 * Método que comprueba si el cliente existe, introduciendo el nombre.	
@@ -111,7 +68,7 @@ public class CustomerController {
 
 	
 	
-	
+	// ------------------------------------------------ CRUD CUSTOMER ------------------------------------------------
 	
 	/**
 	 * GET. Método para revisar el listado de clientes existentes.
@@ -119,12 +76,11 @@ public class CustomerController {
 	 */
 	@GetMapping("/customer")
 	public ResponseEntity<?> leeClientes() {
-		
 		ResponseEntity<?> response = null;
-
+		
 		if (customers.isEmpty()) {
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("La lista está vacía");
-		} else {		
+		} else {
 			response = ResponseEntity.status(HttpStatus.OK).body(customers);
 		}
 		
@@ -138,7 +94,6 @@ public class CustomerController {
 	 * @param nuevoCliente
 	 * @return
 	 */
-	// Creación de usuario, proporcionando JSON en body
 	@PostMapping("/customer")
 	public ResponseEntity<?> creaCliente(@RequestBody Customer nuevo) {		
 		ResponseEntity<?> response = null;
@@ -165,29 +120,16 @@ public class CustomerController {
 		}
 		
 		return response;
-
-		
 	}
 
 	
-//	// Creación de usuario, sólo campo nombre
-//	@PostMapping(path = "/crea")
-//	public ResponseEntity<?> creaCli(@RequestParam String name) {
-//		
-//		int ultimoID = customers.get(customers.size() - 1).getId();
-//		
-//		Customer newCust = new Customer();
-//		newCust.setName(name);
-//		newCust.setId(ultimoID + 1);
-//		
-//		customers.add(newCust);
-//				
-//		return ResponseEntity.status(HttpStatus.CREATED).body(newCust);
-//	}
 	
-	
-	
-	// ACTUALIZAR	
+	/**
+	 * PUT. Modificación de cliente, proporcionando nombre
+	 * @param oldName
+	 * @param newName
+	 * @return
+	 */
 	@PutMapping(path="/customer")
 	public ResponseEntity<?> modCli(@RequestParam String oldName, @RequestParam String newName)  {
 		
@@ -214,24 +156,11 @@ public class CustomerController {
 
 	
 	
-//	@PutMapping(path="/modificar")
-//	public Customer updateCustomer(@RequestBody Customer actualizado) {
-//		Customer customerToUpdate = null;
-//		
-//		for (Customer c : customers) {
-//			if (actualizado.getName().equalsIgnoreCase(c.getName())) {
-//				actualizado = c;
-//			}
-//		}
-//		
-//		actualizado = customers.stream().filter(c -> c.getName().equalsIgnoreCase(c.getName()))
-//				.findFirst().orElse(new Customer());
-//		
-//		return null;
-//	}
-	
-	
-	// BORRAR
+	/**
+	 * DELETE. Eliminación de cliente, proporcionando nombre
+	 * @param name
+	 * @return
+	 */
 	@DeleteMapping(path="/customer")
 	public ResponseEntity<?> borraCli(@RequestParam String name) {
 		
@@ -254,15 +183,11 @@ public class CustomerController {
 		
 		return response;
 	}
-
-	
-	// -------------------------------
-	
-//	private void addVisual(Customer c, Visual v) {
-//		c.getVisuals().add(v);
-//	}
+	// ------------------------------------------------ CRUD CUSTOMER ------------------------------------------------
 	
 	
+	
+	// ------------------------------------------------- CRUD VISUAL -------------------------------------------------
 	/**
 	 * GET. Método para revisar el listado de visualizaciones de un cliente.
 	 * @return
@@ -331,22 +256,34 @@ public class CustomerController {
 			v.setIdVisual(idVisual);
 			
 			
-			
-			// __________PENDIENTE________
-			// Comprobar si el producto existe. ¿lista de productos?
-//			int idProduct = v.getIdProduct();
-			// __________PENDIENTE________
+			// Comprobar si el producto existe.
+			if (v.getIdProduct() >= 0 && v.getIdProduct() <= ProductController.totalProductos()) {
+				
+				// Comprobar si la hora de inicio y fin son correctas.
+				if (v.getInicio() == null || v.getFin() == null) {
+					response = ResponseEntity.status(HttpStatus.NOT_FOUND)
+							.body("ERROR. La hora especificada no es correcta. No se puede añadir la visualización");
+					
+				// si la hora es correcta...
+				} else {
+					// Insertar visualización a cliente
+					customers.get(idCust).addVisual(v);
+					response = ResponseEntity.status(HttpStatus.OK).body(customers.get(idCust).getVisuals());
+				}
+				
+			// si el producto no existe, se muestra el error.
+			} else {
+				response = ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("ERROR. El producto " + v.getIdProduct() + " no existe. No se puede añadir la visualización");
+			}
 
 			
 			
-			// Insertar visualización a cliente
-			customers.get(idCust).addVisual(v);
-
-			response = ResponseEntity.status(HttpStatus.OK).body(customers.get(idCust).getVisuals());
 		}
 
 		return response;
-
 	}
+	// ------------------------------------------------- CRUD VISUAL -------------------------------------------------
+
 	
 }

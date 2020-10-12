@@ -59,8 +59,63 @@ Corregir:
     ? --> crear enum TipoContenido (serie, peli), si es de tipo serie se busca en la lista de series
 
     {
-    "idVisual": 0,
     "inicio": "2020-05-01T02:00:00",
     "fin": "2020-05-01T02:15:00",
     "idProduct": 2
     }
+
+---
+
+---
+
+# Contenido
+
+- CustomerController.
+
+  - Lista de clientes
+  - CRUD de clientes.
+  - CRUD de visualizaciones
+
+- ProductController
+  - Lista de productos (series y pelis)
+  - CRUD de productos (series y pelis)
+
+{
+"inicio": "2020-05-01T02:00:00",
+"fin": "2020-05-01T02:15:00",
+"producto": {
+"idProduct": 1,
+"tipoSuscripcion": "STANDARD",
+"idMovie": 1,
+"title": "La naranja mecánica",
+"categoria": "DRAMA",
+"idSerie": -11
+}
+}
+
+CRUD - REST
+
+    Url del proyecto en git
+    Archivo pdf con la presentación. Debe incluir:
+
+    Introducción a vuestra propuesta (objetivo y cómo has elaborado tu solución)
+
+    UML para el diagrama de clases
+
+    Estructura del proyecto Java y un par de capturas de las entidades
+
+    Controladores
+
+    Peticiones desde el front (vía curl, postman, soapUI o navegador)
+
+    Dificultades encontradas (si las hay) y cómo las has solucionado
+    Propuestas de mejora
+      * Estructura. Ubicación y creación de lista de productos.
+      Al principio tenía lista de series y lista de películas.
+      Ahora tengo una lista de productos en ProductController.
+
+      * Producto. Entidad abstracta?
+
+      * Controlar campos.
+      Por ejemplo, al crear una visualización, el idProducto debe ser válido (existir en la lista).
+      Solución: método público en ProductController que calcula máximo de productos

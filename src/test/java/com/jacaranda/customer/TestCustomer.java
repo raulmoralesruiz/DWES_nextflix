@@ -2,6 +2,7 @@ package com.jacaranda.customer;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,23 +13,19 @@ import org.springframework.http.HttpStatus;
 import com.jacaranda.entity.ComparaClienteDNI;
 import com.jacaranda.entity.ComparaClienteNombre;
 import com.jacaranda.entity.Customer;
+import com.jacaranda.entity.SuscriptionEnum;
 
 class TestCustomer {
 
 	private List<Customer> customers = new ArrayList<>() {
 		{
-			add(new Customer("Ruben", "Dxc", "Sev", "823"));
-			add(new Customer("Alvaro", "Geerw", "Sev", "932"));
-			add(new Customer("Yi", "Bwerd", "Sev", "178"));
-			add(new Customer("Raul", "Sdfe", "Sev", "323"));
+			add(new Customer("Alvaro", "Sánchez", "Sevilla", "11111111A", SuscriptionEnum.BASIC));
+			add(new Customer("Yi", "Chen", "Sevilla", "22222222B", SuscriptionEnum.STANDARD));
+			add(new Customer("Cliente", "Largo", LocalDate.of(1992, 10, 22), "address", "city", "dni", "country", "666444999", "Masculino", SuscriptionEnum.BASIC));
+			add(new Customer("Raul", "Morales", "Sevilla", "33333333C", SuscriptionEnum.PREMIUM));
 		}
 	};
 	
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//		assert(true);
-//	}
 
 	
 	@Test

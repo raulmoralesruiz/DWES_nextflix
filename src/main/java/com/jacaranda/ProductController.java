@@ -26,7 +26,7 @@ public class ProductController {
 
 	
 	@SuppressWarnings("serial")
-	private List<Product> products = new ArrayList<>() {
+	private static List<Product> products = new ArrayList<>() {
 		{
 			add(new Movie("Senderos de gloria", SuscriptionEnum.PREMIUM, Category.DRAMA));
 			add(new Movie("La naranja mecánica", SuscriptionEnum.STANDARD, Category.DRAMA));
@@ -40,6 +40,25 @@ public class ProductController {
 			add(new Serie("Friends", SuscriptionEnum.BASIC, Category.COMEDIA));
 		}
 	};
+
+
+	public static int totalProductos() {
+		return products.size();
+	}
+	
+	public static ArrayList<Product> getListaProductosBasic() {
+		ArrayList<Product> basics = new ArrayList<>();
+		
+		for (Product p : products) {
+			if (p.getTipoSuscripcion().equals(SuscriptionEnum.BASIC)) {
+				basics.add(p);
+			}
+		}
+		
+		return basics;
+	}
+
+
 
 
 
@@ -68,7 +87,7 @@ public class ProductController {
 	
 	
 	/**
-	 * GET. Método para revisar el listado de películas existentes.
+	 * GET. Método para revisar el listado de productos existentes.
 	 * @return
 	 */
 	@GetMapping("/products")
@@ -89,19 +108,6 @@ public class ProductController {
 	
 	
 	// --------------------------------------------------------- MOVIES ---------------------------------------------------------
-//	@SuppressWarnings("serial")
-//	private List<Movie> movies = new ArrayList<>() {
-//		{
-//			add(new Movie("Senderos de gloria", SuscriptionEnum.PREMIUM, Category.DRAMA));
-//			add(new Movie("La naranja mecánica", SuscriptionEnum.STANDARD, Category.DRAMA));
-//			add(new Movie("12 hombres sin piedad", SuscriptionEnum.STANDARD, Category.DRAMA));
-//			add(new Movie("Origen", SuscriptionEnum.STANDARD, Category.SCIFI));
-//			add(new Movie("El show de Truman", SuscriptionEnum.BASIC, Category.SCIFI));
-//		}
-//	};
-	
-	
-	
 	/**
 	 * Método que obtiene el idMovie de la última película en la lista de productos.
 	 * @return
@@ -235,19 +241,7 @@ public class ProductController {
 
 	
 	
-	// --------------------------------------------------------- SERIES ---------------------------------------------------------
-//	@SuppressWarnings("serial")
-//	private List<Serie> series = new ArrayList<>() {
-//		{
-//			add(new Serie("Black Mirror", SuscriptionEnum.PREMIUM, Category.SCIFI));
-//			add(new Serie("Dark", SuscriptionEnum.STANDARD, Category.SCIFI));
-//			add(new Serie("Breaking Bad", SuscriptionEnum.STANDARD, Category.DRAMA));
-//			add(new Serie("Stranger Things", SuscriptionEnum.STANDARD, Category.SCIFI));
-//			add(new Serie("Friends", SuscriptionEnum.BASIC, Category.COMEDIA));
-////			add(new Serie());
-//		}
-//	};
-		
+	// --------------------------------------------------------- SERIES ---------------------------------------------------------		
 	/**
 	 * Método que obtiene el idSerie de la última serie en la lista de productos.
 	 * @return

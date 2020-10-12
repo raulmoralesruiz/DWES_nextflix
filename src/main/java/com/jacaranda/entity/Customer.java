@@ -3,6 +3,9 @@ package com.jacaranda.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.jacaranda.ProductController;
 
 @SuppressWarnings("serial")
 public class Customer implements Serializable {
@@ -18,8 +21,8 @@ public class Customer implements Serializable {
 	private String gender;
 	private int id;
 	private static int idSiguiente = 0;
+	private SuscriptionEnum tipoSuscripcion;
 	private ArrayList<Visual> visuals;
-	
 
 	
 	/**
@@ -33,19 +36,20 @@ public class Customer implements Serializable {
 	public Customer() {
 	}
 	
-	public Customer(String name, String surname, String city, String dni) {
+	public Customer(String name, String surname, String city, String dni, SuscriptionEnum tipoSuscripcion) {
 		super();
 		this.id = idSiguiente++;
 		this.name = name;
 		this.surname = surname;
 		this.city = city;
 		this.dni = dni;
+		this.tipoSuscripcion = tipoSuscripcion;
 		this.visuals = new ArrayList<Visual>();
 	}
 	
 	
 	public Customer(String name, String surname, LocalDate birthdate, String address, String city, String dni,
-			String country, String mobileNumber, String gender) {
+			String country, String mobileNumber, String gender, SuscriptionEnum tipoSuscripcion) {
 		super();
 		this.id = idSiguiente++;
 		this.name = name;
@@ -57,10 +61,11 @@ public class Customer implements Serializable {
 		this.country = country;
 		this.mobileNumber = mobileNumber;
 		this.gender = gender;
+		this.tipoSuscripcion = tipoSuscripcion;
 		this.visuals = new ArrayList<Visual>();
 	}
 
-
+	
 
 	public int getId() {
 		return id;
@@ -128,15 +133,17 @@ public class Customer implements Serializable {
 	public void setVisuals(ArrayList<Visual> visuals) {
 		this.visuals = visuals;
 	}
+	public SuscriptionEnum getTipoSuscripcion() {
+		return tipoSuscripcion;
+	}
+	public void setTipoSuscripcion(SuscriptionEnum tipoSuscripcion) {
+		this.tipoSuscripcion = tipoSuscripcion;
+	}
+
 	
-
-//	@Override
-//	public String toString() {
-//		return "Customer [name=" + name + ", surname=" + surname + ", birthdate=" + birthdate + ", address=" + address
-//				+ ", city=" + city + ", dni=" + dni + ", country=" + country + ", mobileNumber=" + mobileNumber
-//				+ ", gender=" + gender + "]";
-//	}
-
+	
+	
+	
 	public void addVisual(Visual v) {
 		visuals.add(v);
 	}
@@ -146,7 +153,7 @@ public class Customer implements Serializable {
 		int cont = 0;
 
 		for (Visual v : visuals) {
-			if (v.getIdProduct() > 0) {
+			if (v.getIdProduct() >= 0) {
 				cont++;
 			}
 		}
