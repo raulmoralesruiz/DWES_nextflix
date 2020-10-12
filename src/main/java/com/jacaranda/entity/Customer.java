@@ -3,13 +3,12 @@ package com.jacaranda.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-
-import com.jacaranda.ProductController;
 
 @SuppressWarnings("serial")
 public class Customer implements Serializable {
 
+	private int id;
+	private static int idSiguiente = 0;
 	private String name;
 	private String surname;
 	private LocalDate birthdate;
@@ -19,8 +18,6 @@ public class Customer implements Serializable {
 	private String country;
 	private String mobileNumber;
 	private String gender;
-	private int id;
-	private static int idSiguiente = 0;
 	private SuscriptionEnum tipoSuscripcion;
 	private ArrayList<Visual> visuals;
 
@@ -148,12 +145,11 @@ public class Customer implements Serializable {
 		visuals.add(v);
 	}
 	
-	
 	public int contadorVisuals() {
 		int cont = 0;
 
 		for (Visual v : visuals) {
-			if (v.getIdProduct() >= 0) {
+			if (v.getProducto().getIdProduct() >= 0) {
 				cont++;
 			}
 		}

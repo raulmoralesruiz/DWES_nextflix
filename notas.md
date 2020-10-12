@@ -119,3 +119,18 @@ CRUD - REST
       * Controlar campos.
       Por ejemplo, al crear una visualización, el idProducto debe ser válido (existir en la lista).
       Solución: método público en ProductController que calcula máximo de productos
+
+---
+
+antes
+{
+"tipoSuscripcion": "BASIC",
+"title": "nuevaPeli",
+"categoria": "TERROR"
+}
+
+{
+"tipoSuscripcion": "BASIC",
+"title": "nuevaSerie",
+"categoria": "TERROR"
+}

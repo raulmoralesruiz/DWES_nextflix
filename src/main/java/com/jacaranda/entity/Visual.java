@@ -4,24 +4,23 @@ import java.time.LocalDateTime;
 
 public class Visual {
 
-	
 	private int idVisual;
 	private static int idSiguiente = 0;
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
-	private int idProduct;
-
+	private Product producto;
 	
 	
 	public Visual() {
 		super();
 	}
-	public Visual(LocalDateTime inicio, LocalDateTime fin, int idProduct) {
+	public Visual(LocalDateTime inicio, 
+			LocalDateTime fin, Product producto) {
 		super();
 		this.idVisual = idSiguiente++;
 		this.inicio = inicio;
 		this.fin = fin;
-		this.idProduct = idProduct;
+		this.producto = producto;
 	}
 	
 	
@@ -44,12 +43,13 @@ public class Visual {
 	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
-	public int getIdProduct() {
-		return idProduct;
+	public Product getProducto() {
+		return producto;
 	}
-	public void setIdProduct(int idProduct) {
-		this.idProduct = idProduct;
+	public void setProducto(Product producto) {
+		this.producto = producto;
 	}
+	
 	
 	
 	

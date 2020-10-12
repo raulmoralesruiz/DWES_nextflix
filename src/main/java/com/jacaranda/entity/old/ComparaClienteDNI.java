@@ -1,6 +1,8 @@
-package com.jacaranda.entity;
+package com.jacaranda.entity.old;
 
 import java.util.Comparator;
+
+import com.jacaranda.entity.Customer;
 
 public class ComparaClienteDNI implements Comparator<Customer> {
 

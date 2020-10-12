@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jacaranda.entity.Category;
-import com.jacaranda.entity.Movie;
+//import com.jacaranda.entity.Movie;
 import com.jacaranda.entity.Product;
-import com.jacaranda.entity.Serie;
+//import com.jacaranda.entity.Serie;
 import com.jacaranda.entity.SuscriptionEnum;
+import com.jacaranda.entity.TipoContenido;
 
 @RestController
 @RequestMapping(path = "/netflix")
@@ -28,16 +29,16 @@ public class ProductController {
 	@SuppressWarnings("serial")
 	private static List<Product> products = new ArrayList<>() {
 		{
-			add(new Movie("Senderos de gloria", SuscriptionEnum.PREMIUM, Category.DRAMA));
-			add(new Movie("La naranja mecánica", SuscriptionEnum.STANDARD, Category.DRAMA));
-			add(new Movie("12 hombres sin piedad", SuscriptionEnum.STANDARD, Category.DRAMA));
-			add(new Movie("Origen", SuscriptionEnum.STANDARD, Category.SCIFI));
-			add(new Movie("El show de Truman", SuscriptionEnum.BASIC, Category.SCIFI));
-			add(new Serie("Black Mirror", SuscriptionEnum.PREMIUM, Category.SCIFI));
-			add(new Serie("Dark", SuscriptionEnum.STANDARD, Category.SCIFI));
-			add(new Serie("Breaking Bad", SuscriptionEnum.STANDARD, Category.DRAMA));
-			add(new Serie("Stranger Things", SuscriptionEnum.STANDARD, Category.SCIFI));
-			add(new Serie("Friends", SuscriptionEnum.BASIC, Category.COMEDIA));
+			add(new Product("Senderos de gloria", Category.DRAMA, TipoContenido.MOVIE, SuscriptionEnum.PREMIUM));
+			add(new Product("La naranja mecánica", Category.DRAMA, TipoContenido.MOVIE, SuscriptionEnum.BASIC));
+			add(new Product("12 hombres sin piedad", Category.DRAMA, TipoContenido.MOVIE, SuscriptionEnum.BASIC));
+			add(new Product("Origen", Category.SCIFI, TipoContenido.MOVIE, SuscriptionEnum.BASIC));
+			add(new Product("El show de Truman", Category.SCIFI, TipoContenido.MOVIE, SuscriptionEnum.BASIC));
+			add(new Product("Black Mirror", Category.SCIFI, TipoContenido.SERIE, SuscriptionEnum.PREMIUM));
+			add(new Product("Dark", Category.SCIFI, TipoContenido.SERIE, SuscriptionEnum.BASIC));
+			add(new Product("Breaking Bad", Category.DRAMA, TipoContenido.SERIE, SuscriptionEnum.BASIC));
+			add(new Product("Stranger Things", Category.SCIFI, TipoContenido.SERIE, SuscriptionEnum.BASIC));
+			add(new Product("Friends", Category.COMEDIA, TipoContenido.SERIE, SuscriptionEnum.BASIC));
 		}
 	};
 
@@ -46,6 +47,7 @@ public class ProductController {
 		return products.size();
 	}
 	
+	// pendiente.
 	public static ArrayList<Product> getListaProductosBasic() {
 		ArrayList<Product> basics = new ArrayList<>();
 		
@@ -109,30 +111,12 @@ public class ProductController {
 	
 	// --------------------------------------------------------- MOVIES ---------------------------------------------------------
 	/**
-	 * Método que obtiene el idMovie de la última película en la lista de productos.
-	 * @return
-	 */
-	private int idMovieUltimaPeli() {
-		int id = -1;
-		
-		for (int i = 0; i < products.size(); i++) {		
-			if (products.get(i).getIdMovie() != -1) {
-				id = products.get(i).getIdMovie();
-			}		
-		}
-		
-		return id;
-	}
-
-		
-	
-	/**
 	 * POST. Creación de película, proporcionando JSON en body
 	 * @param nuevaPeli
 	 * @return
 	 */
 	@PostMapping("/products/movie")
-	public ResponseEntity<?> creaPeli(@RequestBody Movie nuevaPeli) {
+	public ResponseEntity<?> creaPeli(@RequestBody Product nuevaPeli) {
 
 		ResponseEntity<?> response = null;
 		
@@ -144,19 +128,15 @@ public class ProductController {
 		
 		// Si la película no existe en la lista de películas...
 		if (idPeli == -1) {
-			//obtenemos el idMovie de la última película
-			int id = idMovieUltimaPeli();
-			
-			//incrementamos el anterior id y lo aplicamos a la nuevaPeli
-			nuevaPeli.setIdMovie(id + 1);
-			
+
 			//insertamos la película en la lista de películas.
 			products.add(nuevaPeli);
 			response = ResponseEntity.status(HttpStatus.CREATED).body(nuevaPeli);
 			
 		// Si la película existe en la lista de películas.
 		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR. La película " + newTitle + " ya existe. No se puede crear");
+			response = ResponseEntity.status(HttpStatus.CONFLICT)
+					.body("ERROR. La película " + newTitle + " ya existe. No se puede crear");
 		}
 		
 		return response;
@@ -243,30 +223,12 @@ public class ProductController {
 	
 	// --------------------------------------------------------- SERIES ---------------------------------------------------------		
 	/**
-	 * Método que obtiene el idSerie de la última serie en la lista de productos.
-	 * @return
-	 */
-	private int idSerieUltimaSerie() {
-		int id = -1;
-		
-		for (int i = 0; i < products.size(); i++) {		
-			if (products.get(i).getIdSerie() != -1) {
-				id = products.get(i).getIdSerie();
-			}		
-		}
-		
-		return id;
-	}
-
-	
-	
-	/**
 	 * POST. Creación de serie, proporcionando JSON en body
 	 * @param nuevaSerie
 	 * @return
 	 */
 	@PostMapping("/products/serie")
-	public ResponseEntity<?> creaSerie(@RequestBody Serie nuevaSerie) {
+	public ResponseEntity<?> creaSerie(@RequestBody Product nuevaSerie) {
 
 		ResponseEntity<?> response = null;
 		
@@ -278,12 +240,6 @@ public class ProductController {
 		
 		// Si la serie no existe en la lista de series...
 		if (idSerie == -1) {
-			//obtenemos el idSerie de la última serie
-			int id = idSerieUltimaSerie();
-			
-			//incrementamos el anterior id y lo aplicamos a la nuevaSerie
-			nuevaSerie.setIdSerie(id + 1);
-			
 			//insertamos la serie en la lista de series.
 			products.add(nuevaSerie);
 			response = ResponseEntity.status(HttpStatus.CREATED).body(nuevaSerie);

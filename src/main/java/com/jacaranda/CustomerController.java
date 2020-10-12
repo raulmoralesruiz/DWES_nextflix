@@ -2,7 +2,6 @@ package com.jacaranda;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -16,16 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jacaranda.entity.ComparaClienteNombre;
 import com.jacaranda.entity.Customer;
 import com.jacaranda.entity.SuscriptionEnum;
 import com.jacaranda.entity.Visual;
 
 /**
  * Controller to manage customer related requests
- * 
  * @author raul
- *
  */
 
 @RestController
@@ -36,7 +32,7 @@ public class CustomerController {
 	private List<Customer> customers = new ArrayList<>() {
 		{
 			add(new Customer("Alvaro", "Sánchez", "Sevilla", "11111111A", SuscriptionEnum.BASIC));
-			add(new Customer("Yi", "Chen", "Sevilla", "22222222B", SuscriptionEnum.STANDARD));
+			add(new Customer("Yi", "Chen", "Sevilla", "22222222B", SuscriptionEnum.PREMIUM));
 			add(new Customer("Cliente", "Largo", LocalDate.of(1992, 10, 22), "address", "city", "dni", "country", "666444999", "Masculino", SuscriptionEnum.BASIC));
 			add(new Customer("Raul", "Morales", "Sevilla", "33333333C", SuscriptionEnum.PREMIUM));
 		}
@@ -257,7 +253,8 @@ public class CustomerController {
 			
 			
 			// Comprobar si el producto existe.
-			if (v.getIdProduct() >= 0 && v.getIdProduct() <= ProductController.totalProductos()) {
+			if (v.getProducto().getIdProduct() >= 0 && v.getProducto().getIdProduct() <= ProductController.totalProductos()) {
+
 				
 				// Comprobar si la hora de inicio y fin son correctas.
 				if (v.getInicio() == null || v.getFin() == null) {
@@ -266,18 +263,29 @@ public class CustomerController {
 					
 				// si la hora es correcta...
 				} else {
-					// Insertar visualización a cliente
-					customers.get(idCust).addVisual(v);
-					response = ResponseEntity.status(HttpStatus.OK).body(customers.get(idCust).getVisuals());
+					
+					// guardamos el tipo de suscripción del producto y del usuario
+					SuscriptionEnum suscripcionProducto = v.getProducto().getTipoSuscripcion();
+					SuscriptionEnum suscripcionUsuario = customers.get(idCust).getTipoSuscripcion();
+					
+					// si la suscripción del usuario es inferior a la del producto...
+					if (suscripcionUsuario.equals(SuscriptionEnum.BASIC) && suscripcionProducto.equals(SuscriptionEnum.PREMIUM)) {
+						response = ResponseEntity.status(HttpStatus.CONFLICT)
+								.body("ERROR. La suscripción del usuario no es suficiente para ver este contenido.");
+					} else {
+						// Insertar visualización a cliente
+						customers.get(idCust).addVisual(v);
+						response = ResponseEntity.status(HttpStatus.OK).body(customers.get(idCust).getVisuals());
+					}
+					
 				}
 				
 			// si el producto no existe, se muestra el error.
 			} else {
 				response = ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body("ERROR. El producto " + v.getIdProduct() + " no existe. No se puede añadir la visualización");
+						.body("ERROR. El producto " + v.getProducto().getIdProduct() + " no existe. No se puede añadir la visualización");
 			}
 
-			
 			
 		}
 

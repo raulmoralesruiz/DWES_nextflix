@@ -3,10 +3,13 @@ package com.jacaranda.entity;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public abstract class Product implements Serializable {
+public class Product implements Serializable {
 	
 	private int idProduct;
 	private static int idSiguiente = 0;
+	private String title;
+	private Category categoria;
+	private TipoContenido tipoContenido;
 	private SuscriptionEnum tipoSuscripcion;  
 
 	public Product() {
@@ -17,7 +20,18 @@ public abstract class Product implements Serializable {
 		this();
 		this.tipoSuscripcion = tipoSuscripcion;
 	}
-	
+	public Product(String title, Category categoria, 
+			TipoContenido tipoContenido,
+			SuscriptionEnum tipoSuscripcion) {
+		super();
+		this.idProduct = idSiguiente++;
+		this.title = title;
+		this.categoria = categoria;
+		this.tipoContenido = tipoContenido;
+		this.tipoSuscripcion = tipoSuscripcion;
+	}
+
+
 	
 	
 	public int getIdProduct() {
@@ -32,6 +46,24 @@ public abstract class Product implements Serializable {
 	public static void setIdSiguiente(int idSiguiente) {
 		Product.idSiguiente = idSiguiente;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Category getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Category categoria) {
+		this.categoria = categoria;
+	}
+	public TipoContenido getTipoContenido() {
+		return tipoContenido;
+	}
+	public void setTipoContenido(TipoContenido tipoContenido) {
+		this.tipoContenido = tipoContenido;
+	}
 	public SuscriptionEnum getTipoSuscripcion() {
 		return tipoSuscripcion;
 	}
@@ -39,13 +71,6 @@ public abstract class Product implements Serializable {
 		this.tipoSuscripcion = tipoSuscripcion;
 	}
 	
-	
-	public abstract String getTitle();
-	public abstract int getIdMovie();
-	public abstract void setTitle(String newTitle);
-	public abstract int getIdSerie();
-	
-
 	
 	
 }

@@ -1,6 +1,8 @@
-package com.jacaranda.entity;
+package com.jacaranda.entity.old;
 
-public class Suscription {
+import com.jacaranda.entity.SuscriptionEnum;
+
+public class Old_Suscription {
 
 	private int idSuscription;
 	private static int idSiguiente = 0;
@@ -8,10 +10,10 @@ public class Suscription {
 
 	
 	
-	public Suscription() {
+	public Old_Suscription() {
 		super();
 	}
-	public Suscription(SuscriptionEnum tipo) {
+	public Old_Suscription(SuscriptionEnum tipo) {
 		super();
 		this.idSuscription = idSiguiente++;
 		this.tipo = tipo;
@@ -29,7 +31,7 @@ public class Suscription {
 		return idSiguiente;
 	}
 	public static void setIdSiguiente(int idSiguiente) {
-		Suscription.idSiguiente = idSiguiente;
+		Old_Suscription.idSiguiente = idSiguiente;
 	}
 	public SuscriptionEnum getTipo() {
 		return tipo;

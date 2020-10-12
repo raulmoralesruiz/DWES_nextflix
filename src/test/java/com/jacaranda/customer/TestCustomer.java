@@ -10,17 +10,17 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import com.jacaranda.entity.ComparaClienteDNI;
-import com.jacaranda.entity.ComparaClienteNombre;
 import com.jacaranda.entity.Customer;
 import com.jacaranda.entity.SuscriptionEnum;
+import com.jacaranda.entity.old.ComparaClienteDNI;
+import com.jacaranda.entity.old.ComparaClienteNombre;
 
 class TestCustomer {
 
 	private List<Customer> customers = new ArrayList<>() {
 		{
 			add(new Customer("Alvaro", "Sánchez", "Sevilla", "11111111A", SuscriptionEnum.BASIC));
-			add(new Customer("Yi", "Chen", "Sevilla", "22222222B", SuscriptionEnum.STANDARD));
+			add(new Customer("Yi", "Chen", "Sevilla", "22222222B", SuscriptionEnum.BASIC));
 			add(new Customer("Cliente", "Largo", LocalDate.of(1992, 10, 22), "address", "city", "dni", "country", "666444999", "Masculino", SuscriptionEnum.BASIC));
 			add(new Customer("Raul", "Morales", "Sevilla", "33333333C", SuscriptionEnum.PREMIUM));
 		}

@@ -1,4 +1,4 @@
-package com.jacaranda;
+package com.jacaranda.old;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -16,7 +16,7 @@ import com.jacaranda.entity.Visual;
 
 @RestController
 @RequestMapping(path = "/netflix")
-public class VisualController {
+public class Old_VisualController {
 	
 //	@SuppressWarnings("serial")
 //	private List<Visual> visuals = new ArrayList<>() {
