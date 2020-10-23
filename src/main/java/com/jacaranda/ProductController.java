@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,7 @@ import com.jacaranda.entity.SuscriptionEnum;
 import com.jacaranda.entity.TipoContenido;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/netflix")
 public class ProductController {
 
@@ -38,9 +41,59 @@ public class ProductController {
 			add(new Product("Dark", Category.SCIFI, TipoContenido.SERIE, SuscriptionEnum.BASIC));
 			add(new Product("Breaking Bad", Category.DRAMA, TipoContenido.SERIE, SuscriptionEnum.BASIC));
 			add(new Product("Stranger Things", Category.SCIFI, TipoContenido.SERIE, SuscriptionEnum.BASIC));
-			add(new Product("Friends", Category.COMEDIA, TipoContenido.SERIE, SuscriptionEnum.BASIC));
+			add(new Product("Friends", Category.COMEDY, TipoContenido.SERIE, SuscriptionEnum.BASIC));
 		}
 	};
+	
+	
+
+	
+	
+	
+	
+//	private static List<Category> categorias = new ArrayList<>();
+	
+	@SuppressWarnings("serial")
+	private static List<Category> categorias = new ArrayList<>() {
+		{
+			add(Category.ACTION);
+			add(Category.ADVENTURE);
+			add(Category.COMEDY);
+			add(Category.DRAMA);
+			add(Category.ROMANCE);
+			add(Category.SCIFI);
+			add(Category.TERROR);
+			add(Category.WESTERN);
+		}
+	};
+	
+	
+	
+	
+	/**
+	 * GET. Método para revisar el listado de productos existentes.
+	 * @return
+	 */
+	@GetMapping("/products/categories")
+	public ResponseEntity<?> leerCategorias() {
+		
+//		for (int i = 0; i < Category.values().length; i++) {
+//			categorias.add(Category.values()[i]);
+//		}
+		
+		
+		ResponseEntity<?> response = null;
+
+		if (categorias.isEmpty()) {
+			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("La lista de categorías está vacía.");
+		} else {
+			response = ResponseEntity.status(HttpStatus.OK).body(categorias);
+		}
+
+		return response;
+	}
+	
+	
 
 
 	public static int totalProductos() {
@@ -103,6 +156,32 @@ public class ProductController {
 			response = ResponseEntity.status(HttpStatus.OK).body(products);
 		}
 
+		return response;
+	}
+	
+	
+	/**
+	 * GET. Método para revisar el listado de productos existentes.
+	 * @return
+	 */
+	@GetMapping("/products/{id}")
+	public ResponseEntity<?> leeProductoConcreto(@PathVariable int id) {
+		
+		ResponseEntity<?> response = null;
+		Product p = null;
+		
+		for (int i = 0; i < products.size() && p == null; i++) {
+			if (id == products.get(i).getIdProduct()) {
+				p = products.get(i);
+			} 
+		}
+		
+		if (p == null) {
+			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("El producto con id " + id + " no existe");
+		} else {
+			response = ResponseEntity.status(HttpStatus.OK).body(p);
+		}
+		
 		return response;
 	}
 	

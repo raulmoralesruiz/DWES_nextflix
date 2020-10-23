@@ -134,3 +134,12 @@ antes
 "title": "nuevaSerie",
 "categoria": "TERROR"
 }
+
+---
+
+### Mejoras:
+
+- Pedir serie o película por el id, en vez de nombre
+  Esto se hace utilizando path variable -> {id}
+
+- En la clase customer, cambiar el arraylist de visualizaciones por List.

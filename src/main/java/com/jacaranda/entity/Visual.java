@@ -2,6 +2,7 @@ package com.jacaranda.entity;
 
 import java.time.LocalDateTime;
 
+
 public class Visual {
 
 	private int idVisual;
